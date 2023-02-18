@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_firestore/crud.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
                 child: Text('BEKLENMEYEN BİR HATA OLUŞTU!'),
               );
             } else if (snapshot.hasData) {
-              return MyHomePage(title: "ANA SAYFA");
+              return CrudPage();
             } else {
               return Center(
                 child: CircularProgressIndicator(),
