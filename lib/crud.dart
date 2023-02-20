@@ -14,7 +14,9 @@ final FirebaseFirestore _database = FirebaseFirestore.instance;
 class _CrudPageState extends State<CrudPage> {
   @override
   Widget build(BuildContext context) {
-    final kitapRef = _database.collection('kitaplar');
+    final CollectionReference kitapRef = _database.collection('kitaplar');
+    //final hobbitRef = _database.collection('kitaplar').doc('Hobbit');
+    final hobbitRef = kitapRef.doc('Hobbit');
 
     return Scaffold(
       appBar: AppBar(title: Center(child: Text("CLOUD CRUD İŞLEMLERİ "))),
@@ -24,6 +26,20 @@ class _CrudPageState extends State<CrudPage> {
             Text(
               "VERİLER ",
               style: TextStyle(fontSize: 20),
+            ),
+            Divider(),
+            Text(
+              "${kitapRef.id} ile ${hobbitRef.path} ",
+              style: TextStyle(fontSize: 20),
+            ),
+            Divider(),
+            ElevatedButton(
+              onPressed: () async {
+                DocumentSnapshot documentSnapshot = await hobbitRef.get();
+                Object? data = documentSnapshot.data();
+                print(data);
+              },
+              child: Text("GET DATA"),
             ),
           ],
         ),
