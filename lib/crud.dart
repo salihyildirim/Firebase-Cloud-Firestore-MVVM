@@ -38,6 +38,16 @@ class _CrudPageState extends State<CrudPage> {
                 DocumentSnapshot documentSnapshot = await hobbitRef.get();
                 Object? data = documentSnapshot.data();
                 print(data);
+
+                // Koleksiyon referansı ile get metodu
+
+                QuerySnapshot collectionSnapshot = await kitapRef.get();
+                List<DocumentSnapshot> docs = collectionSnapshot.docs;
+                print(docs.length);
+                print(docs[1]);
+                docs.forEach((e) {
+                  print(e['yazar']);
+                });
               },
               child: Text("GET DATA"),
             ),
