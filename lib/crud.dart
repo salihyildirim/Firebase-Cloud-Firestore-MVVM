@@ -51,6 +51,12 @@ class _CrudPageState extends State<CrudPage> {
               },
               child: Text("GET DATA"),
             ),
+            StreamBuilder(
+                stream: hobbitRef.snapshots(),
+                builder: (context, snap) {
+                  print("veri değişimi oldu");
+                  return Text('StreamBuilder');
+                })
           ],
         ),
       ),
