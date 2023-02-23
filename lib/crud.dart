@@ -52,10 +52,30 @@ class _CrudPageState extends State<CrudPage> {
               child: Text("GET DATA"),
             ),
             StreamBuilder(
+
+                ///stream akışı 3 durumu
+                ///1.hata gelmiş, oluşmuş
+                ///2.veri bekleniyor.
+                ///3. veri geldi ve kullanılabilir.
                 stream: hobbitRef.snapshots(),
-                builder: (context, snap) {
-                  print("veri değişimi oldu");
-                  return Text('StreamBuilder');
+                builder: (context, AsyncSnapshot snap) {
+                  if (snap.hasError) {
+                    return Center(
+                      child: Text('BİR HATA OLUSTU'),
+                    );
+                  } else {
+                    if (!snap.hasData) {
+                      return Center(child: CircularProgressIndicator());
+                    }
+
+                    // asyncsnapshot içinden önce documentsnapshot çıkarılacak
+                    // sonra document içinden mapi çıkarıcaz.
+
+                    var documentSnapshot = snap.data;
+
+                    print("veri değişimi oldu");
+                    return Text('${snap.data['yazar']}');
+                  }
                 })
           ],
         ),
